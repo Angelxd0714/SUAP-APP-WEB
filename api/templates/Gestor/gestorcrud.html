@@ -1,0 +1,200 @@
+{% extends '../informacion_paciente.html' %}
+{% load static %}
+{% block content %}
+<div class='caja_tabla_busqueda'>
+    <div class='indicadores'>
+   <div class='amarillo'>
+    <i class="fa-solid fa-users tamanio_icon_user"></i>
+    <h5><strong>{{proceso}}</strong></h5>
+    <p>Proceso</p>
+   </div>
+   <div class='verde'>
+    <i class="fa-solid fa-users  tamanio_icon_user"></i>
+    <h5><strong>{{abierto}}</strong></h5>
+    <p>Abierto</p>
+   </div>
+   <div class='rojo'>
+    <i class="fa-solid fa-users  tamanio_icon_user"></i>
+    <h5><strong>{{finalizado}}</strong></h5>
+    <p>Finalizado</p>
+   </div>
+    </div>
+    <div class='tabla_busqueda'>
+    <div class='col-sm-5 ms-2'>
+        <div class='form-floating'>
+        <select class='form-control' data-index='8' id='estado'>
+            <option value=''>seleccionar</option>
+            <option value='abierto'>abierto</option>
+            <option value='proceso'>proceso</option>
+            <option value='finalizado'>finalizado</option>
+        </select>
+        <label>Estado del caso</label>
+    </div>
+        <div class='form-floating my-2'>
+        <input type='text' placeholder='nombre completo' class='form-control' id='nombrecompleto' data-index='2'/>
+        <label for='nombrecompleto'>nombre completo</label>
+        </div>
+    </div>
+    <div class='col-sm-5 ms-2'>
+        <div class='form-floating'>
+        <input type='number' placeholder='identificacion' class='form-control' id='identificacion' data-index='1'/>
+        <label for='identificacion'>identificacion</label>
+        </div>
+        <div class='form-floating my-2'>
+        <input type='number' placeholder='numero caso' class='form-control' id='caso' data-index='0'/>
+        <label for='caso'>caso</label>
+        </div>
+    </div>
+    </div>
+
+    <table id="example" class="table table-bordered display nowrap" style="width:100%">
+    <thead class='bg-primary bg-gradient'>
+        <tr>
+            <th class='text-light'>ID caso</th>
+            <th class='text-light'>Numero de documento</th>
+            <th class='text-light'>Nombres</th>
+            <th class='text-light'>Apellidos</th>
+            <th class='text-light'>Telefono</th>
+            <th class='text-light'>Correos</th>
+            <th class='text-light'>Enfermedad</th>
+            <th class='text-light'>EPS</th>
+            <th class='text-light'>Estado actual</th>
+            <th class='text-light'>Detalle caso</th>
+            <th class='text-light'>Seguimiento</th>
+            <th class='text-light'>Reporte</th>
+            <th class='text-light'>Opciones</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for caso in casos%}
+         {% if caso.estado_pendiente != '0' %}
+        <tr class='shadow-sm p-3 mb-5 bg-body rounded'>
+            <td>{{caso.id_caso}}</td>
+            <td>{{caso.id_usuario}}</td>
+            <td>{{caso.id_usuario.primer_nombre}} {{caso.id_usuario.segundo_nombre}}</td>
+            <td>{{caso.id_usuario.primer_apellido}} {{caso.id_usuario.segundo_apellido}}</td>
+            <td>{{caso.id_usuario.celular}}</td>
+            <td>{{caso.id_usuario.login_id.email}}</td>
+            <td>{{caso.enfermedad.nombreenfermedad}}</td>
+            <td>{{caso.id_usuario.id_eps.nombre}}</td>
+            <td>{{caso.estado.nombreestado}}</td>
+             {% if  caso.id_comple_info is None or caso.id_seguimiento is None %}
+             <td><button type='button' class='bg-transparent w-25'><i class="fa-solid fa-file icons_tabla" data-toggle="tooltip" title="Editar Informacion complementaria" id='example'></i></button></td>
+             <td><button  type='button'   class='bg-transparent w-25' ><i class="fa-solid fa-right-to-bracket icons_tabla" title="Editar seguimiento"></i></button></td>            
+
+            {% elif not caso.id_seguimiento  is None or caso.id_comple.info is None %}
+
+            <td><button type='button' class='bg-transparent w-25'  onclick="abrir_moda_info('{% url 'editarInfo' caso.id_comple_info %}')" ><i class="fa-solid fa-file icons_tabla"data-toggle="tooltip" title="Editar Informacion complementaria" id='example'></i></button></td>
+            <td><button  type='button'   class='bg-transparent w-25' onclick="abrir_moda_segui('{% url 'editarsegui' caso.id_seguimiento %}')"title="Editar seguimiento"><i class="fa-solid fa-right-to-bracket icons_tabla"></i></button></td>
+
+            {% endif %}
+            <td><a href="{% url 'reportcaso' caso.id_caso %}" target="_blank"><i class="fa-solid fa-file-pdf  icons_tabla" title='Reporte'></i></a></td>
+            <td><a href='{% url 'editarGestor' caso.id_caso %}'><i class="fa-solid fa-square-pen  icons_tabla" title='Editar caso'></i></a>
+         
+         
+               
+                <button type='button'  class='bg-transparent w-25' onclick="abrir_moda_delete('{% url 'eliminar' caso.id_caso %}')"><i class="fa-solid fa-trash-can  icons_tabla" data-toggle="tooltip" title="Eliminar" id='eliminar'></i></button>
+          
+                  
+            </td>
+           
+        </tr>
+        
+     
+        {% endif %}
+     {% endfor %}
+   
+    </tbody>
+   
+</table>
+
+</div>
+
+
+<!-- Modal -->
+
+
+{% for message in messages %}
+  {% if message.tags == 'success'%}
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="{% static "../static/js/jquery.toast.js" %}"></script>
+  <script type='text/javascript'>
+    $.toast({
+        heading: 'Success',
+        text: '{{message}}',
+        showHideTransition: 'slide',
+        icon: 'success'
+    })
+  </script>
+  {% elif message.tags == 'information' %}
+  <script type='text/javascript'>
+    $.toast({
+        heading: 'Information',
+        text: '{{message}}',
+        showHideTransition: 'slide',
+        icon: 'success'
+    })
+  </script>
+   {% endif %}
+   {% endfor %}
+
+   
+{% endblock %}
+{% block modal %}
+{% for caso in casos %}
+
+<div class="modal fade" id="modal_eliminar" role="dialog"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   
+      </div>
+      <div class="modal fade" id="modal_editar_segui" role="dialog"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   
+    </div>
+  
+    <div class="modal fade" id="modal_editar_info" role="dialog"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   
+    </div>
+  
+    
+
+{% endfor %}
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('#eliminar').tooltip({ placement: 'top'})
+        })
+ 
+      
+        function abrir_moda_delete(url) {
+            var e;
+  
+             $('#modal_eliminar').load(url, function () {
+                 $(this).modal('show')
+             })
+         }
+         function abrir_moda_segui(url) {
+            var e;
+  
+             $('#modal_editar_segui').load(url, function () {
+                 $(this).modal('show')
+             })
+         }
+         function abrir_moda_info(url) {
+            var e;
+  
+             $('#modal_editar_info').load(url, function () {
+                 $(this).modal('show')
+             })
+         }
+ 
+      
+         
+        </script>
+        
+{% endblock %}
+
+

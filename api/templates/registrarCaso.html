@@ -1,0 +1,91 @@
+{% extends "informacion_paciente.html" %}
+{% load static %}
+{% block content %}
+<div class="caja_form">
+<form method="POST" class="form_caso" enctype="multipart/form-data" action=''>
+    {% csrf_token %}
+    <div class="caja-titulo">
+        <h3>Registrar Caso</h3>
+    </div>
+    
+   
+<div class="d-flex flex-column w-100">
+    <div class="caja_caso">
+<div class="caja_inputs">
+
+    <label for="{{forma_persona.name}}">{{forma_persona.enfermedad.label}}</label>
+    {{forma_persona.enfermedad}}
+    <label for="{{forma_persona.name}}">{{forma_persona.id_barrera.label}}</label>
+    {{forma_persona.id_barrera}}
+</div> 
+<div class="caja_caso_inputs">
+    <label for="{{forma_persona.name}}">{{forma_persona.fechaatencioneps.label}}</label>
+    {{forma_persona.fechaatencioneps}}
+    {{forma_persona.id_usuario.as_hidden}}
+    {{forma_persona.fecharesgistrocaso.as_hidden}}
+    {{forma_persona.estado.as_hidden}}
+  
+</div>
+</div>
+<div>
+    
+    <div class="caja_desc">
+        <label for="{{forma_persona.name}}">{{forma_persona.descripcioncaso.label}}</label>
+        {{ forma_persona.descripcioncaso | capfirst }}
+    </div>
+
+
+      
+      
+</div>
+
+<div class="files">
+    <div>
+    <label for="{{forma_persona.name}}">{{forma_persona.numeroradicado.label}}</label>
+    {{forma_persona.numeroradicado}}
+    </div>
+    <div class='boton_caso'>
+    <label for="{{forma_persona.name}}">{{forma_persona.formula_medica.label}}</label>
+    {{forma_persona.formula_medica}}
+    </div>
+    <input type="submit" class="btn btn-primary  boton_submit" value="Crear caso">
+   
+</div> 
+</form>
+</div>
+{% for message in messages %}
+{% if message.tags == 'info'%}
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{% static "../static/js/jquery.toast.js" %}"></script>
+<script type='text/javascript'>
+  $.toast({
+      heading: 'Information',
+      text: '{{message}}',
+      showHideTransition: 'slide',
+      icon: 'info',
+      position:'top-right'
+  })
+</script>
+  {% elif message.tags == 'warning' %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{% static "../static/js/jquery.toast.js" %}"></script>
+<script type='text/javascript'>
+    $.toast({
+        heading: 'Warning',
+        text: '{{message}}',
+        showHideTransition: 'plain',
+        icon: 'warning',
+        position:'top-right'
+    })
+  </script>
+ {% endif %}
+ {% endfor %}
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function (){
+    $('#exampleModal').modal('show')
+})
+</script>
+{% endblock %}

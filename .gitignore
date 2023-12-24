@@ -1,0 +1,9 @@
+# Ignorar la carpeta __pycache__
+__pycache__
+__init__.py
+migrations
+env
+uploads
+media
+**.pdf
+

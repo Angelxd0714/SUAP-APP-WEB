@@ -1,0 +1,281 @@
+.formulario_persona {
+    display: flex;
+    justify-content: center;
+    margin-top: 79px;
+    margin-left: 97px;
+}
+
+.caja__contenedor__inputs {
+    display: flex;
+    flex-direction: column;
+    margin: 0 12px;
+    height: 500px;
+    width: 400px;
+    border-radius: 10px;
+
+
+    -webkit-box-shadow: 4px -2px 12px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px -2px 12px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 4px -2px 12px 0px rgba(0, 0, 0, 0.75);
+    transition: all .3s ease-in-out;
+}
+
+.caja__contenedor__inputs:hover {
+    background: #f3f3f3;
+    /*Su uso requiere establecer las propiedades con sus prefijos
+    para permitir la compatibilidad con todos los navegadores*/
+
+}
+
+.caja_form {
+    display: flex;
+
+    margin-left: 139px;
+    margin-top: 92px;
+    height: 500px;
+    width: 1000px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+
+    transition: all .3s ease-in-out;
+}
+
+.form_caso {
+    width: 1000px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+h4 {
+    margin-left: 22px
+}
+
+.contenedor__input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin-top: 18px;
+    border: none;
+    width: 125px;
+    height: 25px;
+    background: #0a53be;
+    color: white;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background: #0d6efd;
+}
+
+.caja_imagen {
+    display: flex;
+    justify-content: center;
+}
+
+.imagen {
+    width: 200px;
+    height: 200px;
+    border: 5px solid #e9ff3f;
+    border-radius: 50%;
+    transition: all .3s ease-in-out;
+}
+
+.caja_informacion {
+    height: 40px;
+
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+span {
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+
+
+
+
+.caja_seguimiento {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 1000px;
+    height: 400px;
+    margin-left: 177px;
+    margin-top: 83px;
+    justify-content: space-between;
+}
+
+.caja_tabla_busqueda {
+    display: flex;
+    flex-direction: column;
+    width: 1132px;
+    height: 700px;
+    margin-left: 141px;
+    margin-top: 83px;
+    justify-content: space-between;
+  
+    top: 172px;
+}
+
+.icons_tabla {
+    font-size: 25px;
+    color: #2365ea;
+}
+
+.icons_tabla:hover {
+    color: #e93636;
+
+    transition: all 2s ease-in-out;
+}
+
+
+.image__grafica {
+    margin: 0 5px;
+}
+
+
+#respo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tabla_busqueda {
+    display: flex;
+    flex-direction: row;
+    margin: 5px 5px;
+    align-items: center;
+    margin-left: 62px;
+    /* position: relative; */
+    justify-content: center;
+    align-items: center;
+
+}
+
+.caja_historial {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 400px;
+    margin-left: 177px;
+    margin-top: 83px;
+    justify-content: space-between;
+}
+
+.caja_caso {
+    display: flex;
+    flex-direction: row;
+}
+
+.caja_caso_inputs {
+    width: 50%;
+    margin-left: 5px;
+}
+
+.files {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+.files-editar{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.boton_caso{
+    margin-left: 5px;
+}
+.boton_submit{
+    margin-right: 5px;
+    margin-top: 10px;
+}
+.caja_inputs{
+    width: 50%;
+}
+.tables{
+    width: 1000px;
+}
+@media screen and (max-width: 768px) {
+    .formulario_persona {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .caja__contenedor__inputs {
+        margin: 5px 0;
+    }
+
+    .caja_informacion {
+        justify-content: center;
+    }
+
+    .caja_historial {
+        width: 408px;
+        margin-left: 150px;
+    }
+
+    .caja_caso {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .caja_caso_inputs {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .caja_desc {
+        width: 100%;
+    }
+
+    .files {
+        flex-direction: column;
+        align-items: start;
+    }
+    .boton_caso{
+        margin-left: 0;
+        margin-bottom: 12px;
+    }
+    .boton_submit{
+        margin-left: 0;
+    }
+    .caja_form{
+        width: 413px;
+     
+    }
+    .caja_inputs{
+        width: 100%;
+    }
+    .caja_tabla_busqueda{
+        width: 573px;
+    }
+}
+@media screen and (max-width:1024px){
+    .caja_tabla_busqueda{
+        width: 804px;
+    }
+}
+@media screen and (max-width:480px){
+    .caja_tabla_busqueda{
+        width: 311px;
+        height: 1023px;
+    }
+    .tabla_busqueda{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 75px
+    }
+
+}
